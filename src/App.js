@@ -1,25 +1,97 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+import Counter from "./components/counter";
+import Name from "./components/name";
+import Header from "./components/Header";
+import Footer from './components/Footer'
+import HomePage from "./components/homePage"
+import Login from "./components/Login"
+import CreateUser from "./components/CreateUser";
+import UserPage from "./components/UserPage";
+import ActivityPage from "./components/ActivityPage";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+function counterReducer(state = { count: 0 }, action) {
+  switch (action.type) {
+    case "INCREMENT_COUNT":
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    case "DECREMENT_COUNT":
+      return {
+        ...state,
+        count: state.count - 1
+      };
+    default:
+      return state;
+  }
+}
+
+function nameReducer(state = { name: "" }, action) {
+  switch (action.type) {
+    case "UPDATE_NAME":
+      return {
+        ...state,
+        name: action.payload
+      };
+
+    default:
+      return state;
+  }
+}
+
+function userReducer(state = { user: [] }, action) {
+  switch (action.type) {
+    case "GET_USER":
+      return {
+        ...state,
+        user: getUser()
+      };
+    default:
+      return state;
+  }
+}
+
+const getUser = async (id) => {
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/user/1");
+    const json = await response.json();
+    console.log("Look at the response " + JSON.stringify(json));
+    return json;
+  } catch (e) {
+    console.error("Problem ", e);
+  }
+};
+
+const rootReducer = combineReducers({
+  counterReducer,
+  nameReducer,
+  userReducer
+});
+
+const INITIAL_STATE = {};
+
+const store = createStore(rootReducer, INITIAL_STATE);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Header/>
+      <Router>
+      <Route path = "/" component = {HomePage}>
+        
+         <Route path = "/login" component = {Login} />
+         <Route path = "/createuser" component = {CreateUser} />
+         <Route path = "/userpage" component = {UserPage} />
+         <Route path = "/activitypage" component = {ActivityPage} />
+      </Route>
+   </Router>
+      <Counter />
+      <Footer/>
+    </Provider>
   );
 }
 
