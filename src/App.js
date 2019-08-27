@@ -67,6 +67,18 @@ function authenticationReducer(state = { user: []}, action ) {
   }
 }
 
+function createUserReducer(state = { user: []}, action ) {
+  switch (action.type) {
+    case "CREATE_USER":
+      return {
+        ...state,
+        user: createUser(action.payload)
+      };
+    default:
+      return state;
+  }
+}
+
 const getUser = async id => {
   try {
     const response = await fetch("http://localhost:8080/api/v1/user/1");
@@ -101,11 +113,35 @@ console.log(json)
   }
 };
 
+const createUser = async (formBody) => {
+  let bodyJSON=JSON.stringify(formBody)
+  console.log(bodyJSON)
+  try {
+    const response = await fetch(
+      "http://localhost:8080/api/v1/user",
+      {
+        method: "post",
+        body: bodyJSON ,
+        headers: {
+          'Content-Type': 'application/json'}
+      }
+    );
+    console.log("running");
+    const json = await response.json();
+    console.log(JSON.stringify(json));
+console.log(json)
+    return json;
+  } catch (e) {
+    console.error("Problem ", e);
+  }
+};
+
 const rootReducer = combineReducers({
   counterReducer,
   nameReducer,
   userReducer,
-  authenticationReducer
+  authenticationReducer,
+  createUserReducer
 });
 
 const INITIAL_STATE = {};

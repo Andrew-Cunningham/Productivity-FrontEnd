@@ -40,7 +40,7 @@ export default function Login() {
       Login Page
       <div>Login</div>
       <form>
-        Email{" "}
+        Email
         <input
           name="email"
           onChange={handleEmailChange}
