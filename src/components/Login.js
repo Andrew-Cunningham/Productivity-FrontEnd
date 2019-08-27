@@ -13,6 +13,7 @@ export default function Login() {
     ...state.userReducer,
     ...state.authenticationReducer
   }));
+  
   const dispatch = useDispatch();
 
   function handleEmailChange(e) {
@@ -27,7 +28,8 @@ export default function Login() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    //console.log(formBody);
+    console.log(e)
+    console.log(formBody);
         dispatch({
           type: "AUTHENTICATE_USER",
           payload: formBody
@@ -63,7 +65,7 @@ export default function Login() {
         </button>
        
       </form> 
-      <a href='/createuser'><button>CREATE ACCOUNT</button></a>
+      <a href='/createuser'><button>CREATE ACCOUNT</button></a>{console.log(user)}
     </div>
   );
 }
