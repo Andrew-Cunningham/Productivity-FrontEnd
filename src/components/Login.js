@@ -17,17 +17,17 @@ export default function Login() {
 
   function handleEmailChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     formBody.email = e.target.value;
   }
   function handlePasswordChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     formBody.password = e.target.value;
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formBody);
+    //console.log(formBody);
         dispatch({
           type: "AUTHENTICATE_USER",
           payload: formBody
@@ -39,7 +39,7 @@ export default function Login() {
     <div>
       Login Page
       <div>Login</div>
-      <form>
+      <form onSubmit={handleSubmit}>
         Email
         <input
           name="email"
@@ -58,12 +58,12 @@ export default function Login() {
           required
         ></input>
         <br />
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit" >
           LOGIN
         </button>
        
       </form> 
-      <a href='/createuser'><button>Create Account</button></a>
+      <a href='/createuser'><button>CREATE ACCOUNT</button></a>
     </div>
   );
 }

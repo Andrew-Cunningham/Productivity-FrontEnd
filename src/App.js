@@ -55,7 +55,7 @@ function userReducer(state = { user: [] }, action) {
   }
 }
 
-function authenticationReducer(state = { user: []}, action ) {
+function authenticationReducer(state = { user: [] }, action) {
   switch (action.type) {
     case "AUTHENTICATE_USER":
       return {
@@ -67,7 +67,7 @@ function authenticationReducer(state = { user: []}, action ) {
   }
 }
 
-function createUserReducer(state = { user: []}, action ) {
+function createUserReducer(state = { user: [] }, action) {
   switch (action.type) {
     case "CREATE_USER":
       return {
@@ -83,53 +83,52 @@ const getUser = async id => {
   try {
     const response = await fetch("http://localhost:8080/api/v1/user/1");
     const json = await response.json();
-    console.log("Look at the response " + JSON.stringify(json));
+    //console.log("Look at the response " + JSON.stringify(json));
     return json;
   } catch (e) {
     console.error("Problem ", e);
   }
 };
 
-const authenticateUser = async (formBody) => {
-  let bodyJSON=JSON.stringify(formBody)
-  console.log(bodyJSON)
+const authenticateUser = async formBody => {
+  let bodyJSON = JSON.stringify(formBody);
+  //console.log(bodyJSON)
   try {
     const response = await fetch(
       "http://localhost:8080/api/v1/user/authenticate",
       {
         method: "post",
-        body: bodyJSON ,
+        body: bodyJSON,
         headers: {
-          'Content-Type': 'application/json'}
+          "Content-Type": "application/json"
+        }
       }
     );
-    console.log("running");
+    //console.log("running");
     const json = await response.json();
-    console.log(JSON.stringify(json));
-console.log(json)
+    //console.log(JSON.stringify(json));
+    //console.log(json)
     return json;
   } catch (e) {
     console.error("Problem ", e);
   }
 };
 
-const createUser = async (formBody) => {
-  let bodyJSON=JSON.stringify(formBody)
-  console.log(bodyJSON)
+const createUser = async formBody => {
+  let bodyJSON = JSON.stringify(formBody);
+  //console.log(bodyJSON)
   try {
-    const response = await fetch(
-      "http://localhost:8080/api/v1/user",
-      {
-        method: "post",
-        body: bodyJSON ,
-        headers: {
-          'Content-Type': 'application/json'}
+    const response = await fetch("http://localhost:8080/api/v1/user", {
+      method: "post",
+      body: bodyJSON,
+      headers: {
+        "Content-Type": "application/json"
       }
-    );
-    console.log("running");
+    });
+    //console.log("running");
     const json = await response.json();
-    console.log(JSON.stringify(json));
-console.log(json)
+    // console.log(JSON.stringify(json));
+    //console.log(json)
     return json;
   } catch (e) {
     console.error("Problem ", e);

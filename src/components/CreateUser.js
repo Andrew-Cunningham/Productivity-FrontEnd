@@ -12,29 +12,30 @@ export default function CreateUser() {
     ...state.counterReducer,
     ...state.nameReducer,
     ...state.userReducer,
-    ...state.authenticationReducer
+    ...state.authenticationReducer,
+    ...state.createUserReducer
   }));
   const dispatch = useDispatch();
 
   function handleNameChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     formBody.name = e.target.value;
   }
 
   function handleEmailChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     formBody.email = e.target.value;
   }
   function handlePasswordChange(e) {
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     formBody.password = e.target.value;
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formBody);
+    //console.log(formBody);
     dispatch({
       type: "CREATE_USER",
       payload: formBody
@@ -44,7 +45,7 @@ export default function CreateUser() {
   return (
     <div>
       Create User
-      <form>
+      <form onSubmit={handleSubmit}>
         First Name
         <input
           name="name"
@@ -72,8 +73,8 @@ export default function CreateUser() {
           required
         ></input>
         <br />
-        <button type="submit" onClick={handleSubmit}>
-          LOGIN
+        <button type="submit" >
+          CREATE ACCOUNT
         </button>
       </form>
     </div>
