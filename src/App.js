@@ -5,13 +5,13 @@ import { Provider } from "react-redux";
 import Counter from "./components/counter";
 import Name from "./components/name";
 import Header from "./components/Header";
-import Footer from './components/Footer'
-import HomePage from "./components/homePage"
-import Login from "./components/Login"
+import Footer from "./components/Footer";
+import HomePage from "./components/homePage";
+import Login from "./components/Login";
 import CreateUser from "./components/CreateUser";
 import UserPage from "./components/UserPage";
 import ActivityPage from "./components/ActivityPage";
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function counterReducer(state = { count: 0 }, action) {
   switch (action.type) {
@@ -55,7 +55,19 @@ function userReducer(state = { user: [] }, action) {
   }
 }
 
-const getUser = async (id) => {
+function authenticationReducer(state = { user: []}, action ) {
+  switch (action.type) {
+    case "AUTHENTICATE_USER":
+      return {
+        ...state,
+        user: authenticateUser(action.payload)
+      };
+    default:
+      return state;
+  }
+}
+
+const getUser = async id => {
   try {
     const response = await fetch("http://localhost:8080/api/v1/user/1");
     const json = await response.json();
@@ -66,10 +78,34 @@ const getUser = async (id) => {
   }
 };
 
+const authenticateUser = async (formBody) => {
+  let bodyJSON=JSON.stringify(formBody)
+  console.log(bodyJSON)
+  try {
+    const response = await fetch(
+      "http://localhost:8080/api/v1/user/authenticate",
+      {
+        method: "post",
+        body: bodyJSON ,
+        headers: {
+          'Content-Type': 'application/json'}
+      }
+    );
+    console.log("running");
+    const json = await response.json();
+    console.log(JSON.stringify(json));
+console.log(json)
+    return json;
+  } catch (e) {
+    console.error("Problem ", e);
+  }
+};
+
 const rootReducer = combineReducers({
   counterReducer,
   nameReducer,
-  userReducer
+  userReducer,
+  authenticationReducer
 });
 
 const INITIAL_STATE = {};
@@ -79,18 +115,20 @@ const store = createStore(rootReducer, INITIAL_STATE);
 function App() {
   return (
     <Provider store={store}>
-      <Header/>
+      <Header />
       <Router>
-      <Route path = "/" component = {HomePage}>
-        
-         <Route path = "/login" component = {Login} />
-         <Route path = "/createuser" component = {CreateUser} />
-         <Route path = "/userpage" component = {UserPage} />
-         <Route path = "/activitypage" component = {ActivityPage} />
-      </Route>
-   </Router>
+        <Route component={App}>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={Login} />
+            <Route path="/createuser" component={CreateUser} />
+            <Route path="/userpage" component={UserPage} />
+            <Route path="/activitypage" component={ActivityPage} />
+          </Switch>
+        </Route>
+      </Router>
       <Counter />
-      <Footer/>
+      <Footer />
     </Provider>
   );
 }

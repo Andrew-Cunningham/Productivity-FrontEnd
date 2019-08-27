@@ -37,7 +37,7 @@ function Counter() {
         <h3>Your name is: {name}</h3>
       </div> */}
       <button onClick={getUser}>Get User</button>
-      <div>{console.log(user)}
+      <div>
       </div>
     </>
   );
