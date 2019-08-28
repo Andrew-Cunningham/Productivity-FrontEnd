@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { createUser } from "../ducks/users/actions";
 
-export default function CreateUser() {
-  let formBody = {
-    name: "",
-    email: "",
-    password: ""
-  };
+export default function CreateUser(props) {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { user } = useSelector(state => ({
     // ...state.authenticationReducer,
@@ -14,29 +14,11 @@ export default function CreateUser() {
   }));
   const dispatch = useDispatch();
 
-  function handleNameChange(e) {
-    e.preventDefault();
-    //console.log(e.target.value);
-    formBody.name = e.target.value;
-  }
 
-  function handleEmailChange(e) {
-    e.preventDefault();
-    //console.log(e.target.value);
-    formBody.email = e.target.value;
-  }
-  function handlePasswordChange(e) {
-    e.preventDefault();
-    //console.log(e.target.value);
-    formBody.password = e.target.value;
-  }
   function handleSubmit(e) {
     e.preventDefault();
-    //console.log(formBody);
-    dispatch({
-      type: "CREATE_USER",
-      payload: formBody
-    });
+    
+    dispatch(createUser({name, email, password}, props.history));
   }
 
   return (
@@ -46,7 +28,7 @@ export default function CreateUser() {
         First Name
         <input
           name="name"
-          onChange={handleNameChange}
+          onChange={(e)=>setName(e.target.value)}
           type="name"
           placeholder="Enter First Name"
           required
@@ -55,7 +37,7 @@ export default function CreateUser() {
         Email
         <input
           name="email"
-          onChange={handleEmailChange}
+          onChange={(e)=>setEmail(e.target.value)}
           type="email"
           placeholder="Enter Email"
           required
@@ -64,7 +46,7 @@ export default function CreateUser() {
         Password
         <input
           name="password"
-          onChange={handlePasswordChange}
+          onChange={(e)=>setPassword(e.target.value)}
           type="password"
           placeholder="Enter Password"
           required

@@ -18,9 +18,9 @@ export default function(state = initialState, action) {
         };
       } else { return{
         ...state,
-      }}
-    case "CREATE_USER":
-      return {
+      }};
+    case "CREATE_USER": 
+    return {
         ...state,
         user: action.payload,
         authenticated: true

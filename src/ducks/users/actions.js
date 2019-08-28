@@ -25,7 +25,7 @@ export function authenticateUser(formBody, history) {
     }
 }
 
-export const createUser = formBody => {
+export const createUser = (formBody, history) => {
     return async function (dispatch){
     let bodyJSON = JSON.stringify(formBody);
     //console.log(bodyJSON)
@@ -37,11 +37,12 @@ export const createUser = formBody => {
           "Content-Type": "application/json"
         }
       });
-      const json = await response.json();
+      let json = await response.json();
       dispatch({
         type: "CREATE_USER",
         payload: json
-      });
+      })
+      history.push('/userpage')
     } catch (e) {
       console.error("Problem ", e);
     }
