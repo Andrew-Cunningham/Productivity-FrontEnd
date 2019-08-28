@@ -2,8 +2,6 @@ import React from "react";
 import "./App.css";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import Counter from "./components/counter";
-import Name from "./components/name";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./components/homePage";
@@ -12,7 +10,7 @@ import CreateUser from "./components/CreateUser";
 import UserPage from "./components/UserPage";
 import ActivityPage from "./components/ActivityPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Store from "./Store"
+import Store from "./ducks/store"
 
 
 function App() {
@@ -30,7 +28,6 @@ function App() {
           </Switch>
         </Route>
       </Router>
-      <Counter />
       <Footer />
     </Provider>
   );

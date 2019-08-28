@@ -1,41 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { authenticateUser } from "../ducks/users/actions";
+import {Redirect} from "react-router-dom"
+
 
 export default function Login() {
-  let formBody = {
-    email: "",
-    password: ""
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const { count, name, user } = useSelector(state => ({
-    ...state.counterReducer,
-    ...state.nameReducer,
-    ...state.userReducer,
-    ...state.authenticationReducer
-  }));
-  
+
   const dispatch = useDispatch();
+ 
+  const user = useSelector(state =>
+   state.user
+  )
 
-  function handleEmailChange(e) {
-    e.preventDefault();
-    //console.log(e.target.value);
-    formBody.email = e.target.value;
-  }
-  function handlePasswordChange(e) {
-    e.preventDefault();
-    //console.log(e.target.value);
-    formBody.password = e.target.value;
-  }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e)
-    console.log(formBody);
-        dispatch({
-          type: "AUTHENTICATE_USER",
-          payload: formBody
-        });
-      
+    dispatch(authenticateUser({email, password}))
+    
   }
+  
 
   return (
     <div>
@@ -45,7 +30,7 @@ export default function Login() {
         Email
         <input
           name="email"
-          onChange={handleEmailChange}
+          onChange={(e)=>setEmail(e.target.value)}
           type="email"
           placeholder="Enter Email"
           required
@@ -54,18 +39,17 @@ export default function Login() {
         Password
         <input
           name="password"
-          onChange={handlePasswordChange}
+          onChange={(e)=>setPassword(e.target.value)}
           type="password"
           placeholder="Enter Password"
           required
         ></input>
         <br />
-        <button type="submit" >
-          LOGIN
-        </button>
-       
-      </form> 
-      <a href='/createuser'><button>CREATE ACCOUNT</button></a>{console.log(user)}
+        <button type="submit">LOGIN</button>
+      </form>
+      <a href="/createuser">
+        <button>CREATE ACCOUNT</button>
+      </a>
     </div>
   );
 }

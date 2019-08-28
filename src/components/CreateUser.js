@@ -8,11 +8,8 @@ export default function CreateUser() {
     password: ""
   };
 
-  const { count, name, user } = useSelector(state => ({
-    ...state.counterReducer,
-    ...state.nameReducer,
-    ...state.userReducer,
-    ...state.authenticationReducer,
+  const { user } = useSelector(state => ({
+    // ...state.authenticationReducer,
     ...state.createUserReducer
   }));
   const dispatch = useDispatch();
