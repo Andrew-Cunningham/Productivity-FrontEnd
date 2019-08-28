@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateUser } from "../ducks/users/actions";
-import {Redirect} from "react-router-dom"
 
 
-export default function Login() {
+
+export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +17,7 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(authenticateUser({email, password}))
+    dispatch(authenticateUser({email, password}, props.history))
     
   }
   

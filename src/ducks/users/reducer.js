@@ -9,19 +9,21 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case "AUTHENTICATE_USER":
       //let userData = (await authenticateUser(action.payload))
-      if (action.payload.authenticated==true) {
+      console.log(action.payload)
+      if (action.payload.id) {
         return {
           ...state,
           user: action.payload,
           authenticated: true
         };
       } else { return{
-        ...state
+        ...state,
       }}
     case "CREATE_USER":
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
+        authenticated: true
       };
 
     default:

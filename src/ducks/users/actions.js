@@ -1,4 +1,4 @@
-export function authenticateUser(formBody) {
+export function authenticateUser(formBody, history) {
     return async function(dispatch){
         let bodyJSON = JSON.stringify(formBody);
     try {
@@ -17,6 +17,7 @@ export function authenticateUser(formBody) {
         type: "AUTHENTICATE_USER",
         payload: json
       })
+      history.push('/userpage')
     } catch (e) {
       console.error("Problem ", e);
     }
