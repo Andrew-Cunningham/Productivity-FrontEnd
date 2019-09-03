@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticateUser } from "../ducks/users/actions";
-
-
+import { getUserActivity } from "../ducks/activities/actions";
+import {authenticateUser} from "../ducks/users/actions"
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const dispatch = useDispatch();
- 
-  const user = useSelector(state =>
-   state.user
-  )
 
+  const user = useSelector(state => ({
+    ...state.authenticationReducer
+  }));
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(authenticateUser({email, password}, props.history))
-    
+    dispatch(authenticateUser({email, password}, props.history));
+    //dispatch(getUserActivity(props.user.id, props.history))
   }
-  
 
   return (
     <div>
@@ -30,7 +26,7 @@ export default function Login(props) {
         Email
         <input
           name="email"
-          onChange={(e)=>setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           type="email"
           placeholder="Enter Email"
           required
@@ -39,7 +35,7 @@ export default function Login(props) {
         Password
         <input
           name="password"
-          onChange={(e)=>setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           type="password"
           placeholder="Enter Password"
           required
