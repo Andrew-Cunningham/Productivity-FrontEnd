@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import Header from "./components/Header";
@@ -16,11 +15,12 @@ import Store from "./ducks/store"
 function App() {
   return (
     <Provider store={Store}>
-      <Header />
+      
       <Router>
         <Route component={App}>
           <Switch>
             <Route exact path="/" component={HomePage} />
+            {/* <Header /> */}
             <Route path="/login" component={Login} />
             <Route path="/createuser" component={CreateUser} />
             <Route path="/userpage" component={UserPage} />

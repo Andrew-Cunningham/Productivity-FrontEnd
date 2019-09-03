@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserActivity } from "../ducks/activities/actions";
-import {authenticateUser} from "../ducks/users/actions";
-//import "../styles/homePage.css"
+import {authenticateUser} from "../ducks/users/actions"
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
@@ -21,8 +20,8 @@ export default function Login(props) {
 
   return (
     <div>
-      
-      <div>Sign In</div>
+      Login Page
+      <div>Login</div>
       <form onSubmit={handleSubmit}>
         Email
         <input

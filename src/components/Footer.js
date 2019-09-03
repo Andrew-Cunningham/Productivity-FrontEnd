@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 
 export default function Footer() {
-    return (
+  return (
+    <div>
+      <footer id="main-footer" >
+        <div>CAS Web Solutions</div>
         <div>
-            Footer
+          Project by{" "}
+          <a href="http://andrew-cunningham.surge.sh/" target="_blank" rel="noopener noreferrer">
+            Andrew Cunningham
+          </a>
         </div>
-    )
+      </footer>
+    </div>
+  );
 }
