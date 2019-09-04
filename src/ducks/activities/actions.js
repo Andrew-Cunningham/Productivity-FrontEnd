@@ -4,7 +4,9 @@
 
  export function getUserActivity(id) {
         return async function(dispatch){
-        try {
+        //let id = JSON.stringify(id)
+        console.log(id)
+          try {
           const response = await fetch(
             "http://localhost:8080/api/v1/activities/" + id,
             {

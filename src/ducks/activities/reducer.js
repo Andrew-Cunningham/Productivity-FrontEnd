@@ -1,11 +1,22 @@
-let intitalState = [];
+let intitalState = {
+  activities: []
+}
 
 export default function(state = intitalState, action) {
   switch (action.type) {
     case "GET_ACTIVITIES":
-      return [...action.payload];
+      return {
+        ...state,
+        activities: action.payload
+      };
 
-    default:
+   case "ADD_ACTIVITY":
+       return{
+           ...state,
+           
+       };
+   
+      default:
       return state;
   }
 }

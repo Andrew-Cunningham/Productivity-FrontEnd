@@ -1,0 +1,12 @@
+#main-footer{
+    padding: 2em;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    bottom:0
+}
+
+#main-footer a{
+    color: #2690d4;
+    text-decoration: none;
+}

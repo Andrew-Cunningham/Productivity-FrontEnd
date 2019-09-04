@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserActivity } from "../ducks/activities/actions";
 import {authenticateUser} from "../ducks/users/actions";
-//import "../styles/homePage.css"
+import "../styles/Login.css"
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
@@ -20,12 +20,12 @@ export default function Login(props) {
   }
 
   return (
-    <div>
+    <div id="main-container">
       
-      <div>Sign In</div>
+      <div >Sign In</div>
       <form onSubmit={handleSubmit}>
-        Email
-        <input
+        
+        <input class="btn"
           name="email"
           onChange={e => setEmail(e.target.value)}
           type="email"
@@ -33,8 +33,8 @@ export default function Login(props) {
           required
         ></input>
         <br />
-        Password
-        <input
+        
+        <input class="btn"
           name="password"
           onChange={e => setPassword(e.target.value)}
           type="password"
@@ -42,10 +42,10 @@ export default function Login(props) {
           required
         ></input>
         <br />
-        <button type="submit">LOGIN</button>
+        <button class="btn" type="submit">LOGIN</button>
       </form>
       <a href="/createuser">
-        <button>CREATE ACCOUNT</button>
+        <button class="btn">CREATE ACCOUNT</button>
       </a>
     </div>
   );
