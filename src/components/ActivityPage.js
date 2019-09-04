@@ -17,7 +17,6 @@ export default function ActivityPage(props) {
     e.preventDefault();
     console.log("running");
     console.log(startDate)
-    console.log(activities[5].date >= startDate)
     dispatch(filertActivities(startDate, endDate))
   }
 

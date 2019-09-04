@@ -21,10 +21,9 @@ export function getUserActivity(id) {
 }
 
 export function filertActivities(startDate, endDate) {
-  retun function(dispatch){
-    try{
-      dispatch({
+  return{
     type:"FILTER_ACTIVITIES",
-    payload
-  })}}
+    startDate,
+    endDate
+  }
 }
