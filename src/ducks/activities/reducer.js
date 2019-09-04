@@ -15,6 +15,14 @@ export default function(state = intitalState, action) {
            ...state,
            
        };
+
+    case "FILTER_ACTIVITY":
+        activities: (activities.filter(function(activity) {
+          if (activity.date >= startDate && activity.date <= endDate) {
+            console.log(activity.date);
+            return activity;
+          }
+        }))
    
       default:
       return state;

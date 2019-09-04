@@ -1,30 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import {filertActivities} from "../ducks/activities/actions"
 export default function ActivityPage(props) {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
   const dispatch = useDispatch();
 
   const state = useSelector(state => state);
 
-  let activities = state.activityReducer.activities
+  let activities = state.activityReducer.activities;
 
-  
-  function filertActivities(startDate, endDate){
-     let filteredActivities=activities.filter(function (activity){
-         if (activity.date<=startDate && activity.date>=endDate) {
-            console.log(activity) 
-            return activity
-         }
-     })
+  let filteredActivities;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("running");
+    console.log(startDate)
+    console.log(activities[5].date >= startDate)
+    dispatch(filertActivities(startDate, endDate))
   }
 
-  const dateOne='8/01/2019'
-  const dateTwo='9/09/2019'
   return (
     <div>
       ActivityPage
       {console.log(state)}
-      <button onClick={()=>activities=filertActivities(dateOne, dateTwo)}/>
+      <form onSubmit={handleSubmit}>
+        <input
+          class="btn"
+          name="startDate"
+          onChange={e => setStartDate(e.target.value)}
+          type="date"
+          placeholder="Enter Start Date"
+          required
+        ></input>
+        <br />
+
+        <input
+          class="btn"
+          name="endDate"
+          onChange={e => setEndDate(e.target.value)}
+          type="date"
+          placeholder="Enter End Date"
+          required
+        ></input>
+        <br />
+
+        <button class="btn" type="submit">Filter By Selected Dates</button>
+      </form>
+      {console.log(filteredActivities)}
       {/* {console.log(`activities ` + state.activityReducer.activities)} */}
       {/* {state.activityReducer.activities.map((activity, i) => (
         <activity name={activity} key={state.activityReducer.activies[i].id} />
@@ -32,10 +56,12 @@ export default function ActivityPage(props) {
       {/* {state.activityReducer.activities.forEach(element => {
         <activity name={element} key={state.activityReducer.activies.id} />;
       })} */}
-       { activities.map((activity, i)=>(
-            <div class="card-content" name={activity.content} key={activity.id}>Date: {activity.date} Activity: {activity.content} <br/> Time: {activity.activityTimeInMinuets} Type: {activity.contentType} </div>
-        ))}
-
+      {activities.map((activity, i) => (
+        <div class="card-content" name={activity.content} key={activity.id}>
+          Date: {activity.date} Activity: {activity.content} <br /> Time:{" "}
+          {activity.activityTimeInMinuets} Type: {activity.contentType}{" "}
+        </div>
+      ))}
     </div>
   );
 }
