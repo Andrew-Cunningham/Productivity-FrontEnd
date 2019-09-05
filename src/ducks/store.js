@@ -12,7 +12,6 @@ const rootReducer = combineReducers({
     activityReducer
   });
 
-
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleware)));
+export default createStore(rootReducer);
 
 
