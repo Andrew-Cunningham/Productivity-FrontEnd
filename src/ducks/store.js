@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 import userReducer from './users/reducer'
 import activityReducer from "./activities/reducer"
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 let middleware=[thunk]
 
