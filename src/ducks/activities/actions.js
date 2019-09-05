@@ -54,3 +54,24 @@ export const addActivity = (id, formBody, history) => {
     }
   };
 };
+
+export const deleteActivity = (id, history) =>{
+  return async function(dispatch){
+    try{
+      const response = await fetch(
+        "http://localhost:8080/api/v1/activities/" + id,
+        {
+          method: "delete",
+        }
+      );
+      let json = await response.json();
+      dispatch({
+        type: "DELETE_ACTIVITY"
+      });
+      history.push("/activitypage");
+    } catch (e) {
+      console.error("Problem ", e);
+    }
+    }
+  }
+

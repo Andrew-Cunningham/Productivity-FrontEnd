@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filertActivities } from "../ducks/activities/actions";
+import { filertActivities, deleteActivity } from "../ducks/activities/actions";
 import { Link } from "react-router-dom";
 export default function ActivityPage(props) {
   const [startDate, setStartDate] = useState("");
@@ -13,12 +13,18 @@ export default function ActivityPage(props) {
   let activities = state.activityReducer.activities;
 
   let filteredActivities;
+  let id;
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log("running");
     console.log(startDate);
     dispatch(filertActivities(startDate, endDate));
+  }
+
+  function handleClick(id){
+   //e.preventDefault();
+    dispatch(deleteActivity(id, props.history))
   }
 
   return (
@@ -32,11 +38,12 @@ export default function ActivityPage(props) {
           <button class="btn">Sign In To Access</button>
         </Link>
       )}
-      {state.userReducer.authenticated ? (
-        <Link to={`/`}>
-          <button class="btn">Sign Out</button>
-        </Link>
-      ) : null}
+      {state.userReducer.authenticated ? ( <a href={`/`}>
+      <button class="btn">Sign Out</button>
+    </a>) : (<Link to={`/`}>
+      <button class="btn">Home</button>
+    </Link>
+  )}
       <br />
       ActivityPage
       {console.log(state)}
@@ -64,12 +71,13 @@ export default function ActivityPage(props) {
           Filter By Selected Dates
         </button>
       </form>
-      {activities.length>1?(activities.map((activity, i) => (
+      {activities.length>=1?(activities.map((activity, i) => (
         <div class="card-content" name={activity.content} key={activity.id}>
           Date: {activity.date} Activity: {activity.content} <br /> Time:{" "}
-          {activity.activityTimeInMinuets} Type: {activity.contentType}{" "}
+          {activity.activityTimeInMinuets} Type: {activity.contentType}
+          <button class='btn' onClick={()=>handleClick(activity.id)}>Delete</button>{" "}
         </div>
-      ))):null}
+      ))): state.userReducer.authenticated ? <div class="card-content">Add Activites To See Them Here!</div>: <div class="card-content">Please Sign In To Add Activites</div>}
     </div>
   );
 }

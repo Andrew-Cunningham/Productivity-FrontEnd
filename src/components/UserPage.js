@@ -48,9 +48,11 @@ export default function UserPage(props) {
           <button class="btn">Sign In To Access</button>
         </Link>
       )}
-      {state.userReducer.authenticated ? ( <Link to={`/`}>
+      {state.userReducer.authenticated ? ( <a href={`/`}>
         <button class="btn">Sign Out</button>
-      </Link>): null}
+      </a>): ( <Link to={`/`}>
+        <button class="btn">Home</button>
+      </Link>)}
      
       <form onSubmit={handleSubmit}>
         <input
@@ -70,7 +72,7 @@ export default function UserPage(props) {
           placeholder="Enter Activity Type"
           required
         ></input>
-        <br /> <br />
+        <br /> 
         <input
           class="btn"
           name="activityTimeInMinuets"
@@ -79,7 +81,7 @@ export default function UserPage(props) {
           placeholder="Enter Time In Minuets"
           required
         ></input>
-        <br /> <br />
+        <br /> 
         <input
           class="btn"
           name="date"
@@ -90,7 +92,7 @@ export default function UserPage(props) {
         ></input>
         <br />
         <button class="btn" type="submit">
-          Filter By Selected Dates
+          Add Activity
         </button>
       </form>
     </div>

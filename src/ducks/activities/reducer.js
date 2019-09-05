@@ -29,7 +29,11 @@ export default function(state = intitalState, action) {
         return{
           ...state,
           activities: action.payload
-        }
+        };
+        case "DELETE_ACTIVITY":
+          return{
+            ...state
+          };
       default:
       return state;
   }
