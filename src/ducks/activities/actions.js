@@ -1,10 +1,13 @@
+import { baseUrl } from "../dbURL";
+
+
 export function getUserActivity(id) {
   return async function(dispatch) {
     //let id = JSON.stringify(id)
     console.log(id);
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/activities/" + id,
+        baseUrl+ "/api/v1/activities/" + id,
         {
           method: "get"
         }
@@ -34,7 +37,7 @@ export const addActivity = (id, formBody, history) => {
     //console.log(bodyJSON)
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/activities/user/" + id,
+        baseUrl+"/api/v1/activities/user/" + id,
         {
           method: "post",
           body: bodyJSON,
@@ -59,7 +62,7 @@ export const deleteActivity = (id, history) =>{
   return async function(dispatch){
     try{
       const response = await fetch(
-        "http://localhost:8080/api/v1/activities/" + id,
+        baseUrl+"/api/v1/activities/" + id,
         {
           method: "delete",
         }
