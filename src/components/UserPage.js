@@ -4,7 +4,7 @@ import { authenticateUser } from "../ducks/users/actions";
 import { Link } from "react-router-dom";
 import { getUserActivity } from "../ducks/activities/actions";
 import { useEffect } from "react";
-import {addActivity} from "../ducks/activities/actions"
+import { addActivity } from "../ducks/activities/actions";
 export default function UserPage(props) {
   const dispatch = useDispatch();
 
@@ -28,14 +28,30 @@ export default function UserPage(props) {
   function handleSubmit(e) {
     e.preventDefault();
     //console.log("running")
-    dispatch(addActivity(user.id, {content, contentType, activityTimeInMinuets, date }, props.history))
+    dispatch(
+      addActivity(
+        user.id,
+        { content, contentType, activityTimeInMinuets, date },
+        props.history
+      )
+    );
   }
-
 
   return (
     <div>
-      UserPage
-      <Link to={`/activitypage`}>activities</Link>
+      {state.userReducer.authenticated ? (
+        <Link to={`/activitypage`}>
+          <button class="btn">My Activities</button>
+        </Link>
+      ) : (
+        <Link to={`/login`}>
+          <button class="btn">Sign In To Access</button>
+        </Link>
+      )}
+      {state.userReducer.authenticated ? ( <Link to={`/`}>
+        <button class="btn">Sign Out</button>
+      </Link>): null}
+     
       <form onSubmit={handleSubmit}>
         <input
           class="btn"

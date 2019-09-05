@@ -48,7 +48,7 @@ export const addActivity = (id, formBody, history) => {
         type: "CREATE_ACTIVITY",
         payload: json
       });
-      history.push("/userpage");
+      history.push("/activitypage");
     } catch (e) {
       console.error("Problem ", e);
     }
