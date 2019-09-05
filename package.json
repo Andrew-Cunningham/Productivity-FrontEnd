@@ -34,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^8.1.0",
     "redux-devtools-extension": "^2.13.8"
   }
 }
