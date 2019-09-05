@@ -1,33 +1,82 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { authenticateUser } from "../ducks/users/actions"
-import {Link} from "react-router-dom"
-import { getUserActivity } from '../ducks/activities/actions';
-import {useEffect} from "react"
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticateUser } from "../ducks/users/actions";
+import { Link } from "react-router-dom";
+import { getUserActivity } from "../ducks/activities/actions";
+import { useEffect } from "react";
+import {addActivity} from "../ducks/activities/actions"
 export default function UserPage(props) {
-    
-     const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-     const state = useSelector(state=>state)
-    
-    const user = state.userReducer.user
+  const state = useSelector(state => state);
 
-    // dispatch(authenticateUser({email, password}, props.history))
- function getActivities(id){
-    dispatch(getUserActivity(id, props.historty))
- }
+  const user = state.userReducer.user;
 
- useEffect(() => {
-getActivities(user.id)
- }, [])
+  // dispatch(authenticateUser({email, password}, props.history))
+  function getActivities(id) {
+    dispatch(getUserActivity(id, props.historty));
+  }
+
+  useEffect(() => {
+    getActivities(user.id);
+  }, []);
+
+  const [content, setContent] = useState("");
+  const [contentType, setContentType] = useState("");
+  const [activityTimeInMinuets, setActivityTimeInMinuets] = useState();
+  const [date, setDate] = useState();
+  function handleSubmit(e) {
+    e.preventDefault();
+    //console.log("running")
+    dispatch(addActivity(user.id, {content, contentType, activityTimeInMinuets, date }, props.history))
+  }
 
 
-    return (
-        <div>
-            UserPage
-            <Link to={`/activitypage`}>activities</Link>
-            {console.log(user)}
-            {console.log(state)}
-        </div>
-    )
+  return (
+    <div>
+      UserPage
+      <Link to={`/activitypage`}>activities</Link>
+      <form onSubmit={handleSubmit}>
+        <input
+          class="btn"
+          name="content"
+          onChange={e => setContent(e.target.value)}
+          type="string"
+          placeholder="Enter Activity"
+          required
+        ></input>
+        <br />
+        <input
+          class="btn"
+          name="contentType"
+          onChange={e => setContentType(e.target.value)}
+          type="string"
+          placeholder="Enter Activity Type"
+          required
+        ></input>
+        <br /> <br />
+        <input
+          class="btn"
+          name="activityTimeInMinuets"
+          onChange={e => setActivityTimeInMinuets(e.target.value)}
+          type="number"
+          placeholder="Enter Time In Minuets"
+          required
+        ></input>
+        <br /> <br />
+        <input
+          class="btn"
+          name="date"
+          onChange={e => setDate(e.target.value)}
+          type="date"
+          placeholder="Enter Date"
+          required
+        ></input>
+        <br />
+        <button class="btn" type="submit">
+          Filter By Selected Dates
+        </button>
+      </form>
+    </div>
+  );
 }

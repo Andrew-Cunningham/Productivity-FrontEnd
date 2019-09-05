@@ -24,7 +24,12 @@ export default function(state = intitalState, action) {
             return activity;
           }
         }))
-      }
+      };
+      case "CREATE_ACTIVITY":
+        return{
+          ...state,
+          activities: action.payload
+        }
       default:
       return state;
   }

@@ -21,9 +21,36 @@ export function getUserActivity(id) {
 }
 
 export function filertActivities(startDate, endDate) {
-  return{
-    type:"FILTER_ACTIVITIES",
+  return {
+    type: "FILTER_ACTIVITIES",
     startDate,
     endDate
-  }
+  };
 }
+
+export const addActivity = (id, formBody, history) => {
+  return async function(dispatch) {
+    let bodyJSON = JSON.stringify(formBody);
+    //console.log(bodyJSON)
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/activities/user/" + id,
+        {
+          method: "post",
+          body: bodyJSON,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      let json = await response.json();
+      dispatch({
+        type: "CREATE_ACTIVITY",
+        payload: json
+      });
+      history.push("/userpage");
+    } catch (e) {
+      console.error("Problem ", e);
+    }
+  };
+};
