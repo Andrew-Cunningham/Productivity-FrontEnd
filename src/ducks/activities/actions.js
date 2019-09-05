@@ -68,7 +68,7 @@ export const deleteActivity = (id, history) =>{
       dispatch({
         type: "DELETE_ACTIVITY"
       });
-      history.push("/activitypage");
+      history.push("/userpage");
     } catch (e) {
       console.error("Problem ", e);
     }
