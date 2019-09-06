@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../ducks/users/actions";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function CreateUser(props) {
   const [name, setName] = useState("");
@@ -21,44 +21,51 @@ export default function CreateUser(props) {
   }
 
   return (
-    <div>
-      <Link to={`/`}>
-        <button class="btn">Home</button>
-      </Link>
-      <h2>Create Account</h2>
-      <form onSubmit={handleSubmit}>
-        <input class="btn"
-          name="name"
-          onChange={e => setName(e.target.value)}
-          type="name"
-          placeholder="Enter First Name"
-          required
-        ></input>
-        <br></br>
-        
-        <input
-        class="btn"
-          name="email"
-          onChange={e => setEmail(e.target.value)}
-          type="email"
-          placeholder="Enter Email"
-          required
-        ></input>
-        <br />
-        
-        <input
-        class="btn"
-          name="password"
-          onChange={e => setPassword(e.target.value)}
-          type="password"
-          placeholder="Enter Password"
-          required
-        ></input>
-        <br />
-        <button class="btn"type="submit">CREATE ACCOUNT</button>
-      </form>
-      <main id="main">
+    <div id="main-container">
+      <header id="showcase" class="grid">
+        <div class="bg-img"></div>
+        <div class="content-wrap">
+          <Link to={`/`}>
+            <button class="btn">Home</button>
+          </Link>
+          <h2>Create Account</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              class="btn"
+              name="name"
+              onChange={e => setName(e.target.value)}
+              type="name"
+              placeholder="Enter First Name"
+              required
+            ></input>
+            <br></br>
 
+            <input
+              class="btn"
+              name="email"
+              onChange={e => setEmail(e.target.value)}
+              type="email"
+              placeholder="Enter Email"
+              required
+            ></input>
+            <br />
+
+            <input
+              class="btn"
+              name="password"
+              onChange={e => setPassword(e.target.value)}
+              type="password"
+              placeholder="Enter Password"
+              required
+            ></input>
+            <br />
+            <button class="btn" type="submit">
+              CREATE ACCOUNT
+            </button>
+          </form>
+        </div>
+      </header>
+      <main id="main">
         <section id="section-b" class="grid">
           <ul>
             <li>
@@ -70,7 +77,8 @@ export default function CreateUser(props) {
                 <div class="card-content">
                   <h3 class="card-title">Keep Track Of What You Do</h3>
                   <p>
-                    Productivity Tracker is a tool that helps you keep track of activities
+                    Productivity Tracker is a tool that helps you keep track of
+                    activities
                   </p>
                 </div>
               </div>
@@ -84,7 +92,8 @@ export default function CreateUser(props) {
                 <div class="card-content">
                   <h3 class="card-title">Sort Your Activities</h3>
                   <p>
-                    View your saved activities by a date range to see how much time you spent on each activity  
+                    View your saved activities by a date range to see how much
+                    time you spent on each activity
                   </p>
                 </div>
               </div>
@@ -98,7 +107,8 @@ export default function CreateUser(props) {
                 <div class="card-content">
                   <h3 class="card-title">Make A Better Use Of Your Time</h3>
                   <p>
-                    If you could see that you spent 100 hours watching TV shows, wouldn't you want to make change?
+                    If you could see that you spent 100 hours watching TV shows,
+                    wouldn't you want to make change?
                   </p>
                 </div>
               </div>

@@ -28,7 +28,12 @@ export default function ActivityPage(props) {
   }
 
   return (
-    <div>
+    <div id="main-container">
+    <header id="showcase" class="grid">
+<div class="bg-img"></div>
+<div class="content-wrap">
+
+
       {state.userReducer.authenticated ? (
         <Link to={`/userpage`}>
           <button class="btn">Add Activity</button>
@@ -88,8 +93,10 @@ export default function ActivityPage(props) {
         <div class="card-content">Add Activites To See Them Here!</div>
       ) : (
         <div class="card-content">Please Sign In To Add Activites</div>
-      )}
+      )}</div></header>
       <main id="main">
+
+
 
 <section id="section-b" class="grid">
   <ul>

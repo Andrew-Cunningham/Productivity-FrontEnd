@@ -21,6 +21,11 @@ export default function Login(props) {
 
   return (
     <div id="main-container">
+            <header id="showcase" class="grid">
+        <div class="bg-img"></div>
+        <div class="content-wrap">
+
+
       {user.authenticated ? (
         <Link to={`/activitypage`}>
           <button class="btn">My Activities</button>
@@ -60,6 +65,9 @@ export default function Login(props) {
       <a href="/createuser">
         <button class="btn">CREATE ACCOUNT</button>
       </a>
+      </div>
+    
+    </header>
       <main id="main">
 
         <section id="section-b" class="grid">
