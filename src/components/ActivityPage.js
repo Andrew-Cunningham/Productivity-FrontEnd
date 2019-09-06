@@ -78,7 +78,7 @@ export default function ActivityPage(props) {
         <button class="btn" type="submit">
           Filter By Selected Dates
         </button>
-      </form>
+      </form></div></header>
       {activities.length >= 1 ? (
         activities.map((activity, i) => (
           <div class="card-content" name={activity.content} key={activity.id}>
@@ -93,7 +93,7 @@ export default function ActivityPage(props) {
         <div class="card-content">Add Activites To See Them Here!</div>
       ) : (
         <div class="card-content">Please Sign In To Add Activites</div>
-      )}</div></header>
+      )}
       <main id="main">
 
 
