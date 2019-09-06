@@ -92,7 +92,7 @@ export default function ActivityPage(props) {
       ) : state.userReducer.authenticated ? (
         <div class="card-content">Add Activites To See Them Here!</div>
       ) : (
-        <div class="card-content">Please Sign In To Add Activites</div>
+        <div class="card-content">Please Sign In To See Activites</div>
       )}
       <main id="main">
 
